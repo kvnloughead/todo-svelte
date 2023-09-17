@@ -1,14 +1,22 @@
 <script>
   export let todos = [];
+
   let newTodoName = '';
+  let newTodoId;
+
   $: totalTodos = todos.length;
   $: completedTodos = todos.filter((todo) => todo.completed).length;
+  $: {
+    if (totalTodos === 0) {
+      newTodoId = 1;
+    } else {
+      // make new ID one greater than largest existing id
+      newTodoId = Math.max(...todos.map((t) => t.id)) + 1;
+    }
+  }
 
   function addTodo() {
-    todos = [
-      ...todos,
-      { id: totalTodos + 1, name: newTodoName, completed: false },
-    ];
+    todos = [...todos, { id: newTodoId, name: newTodoName, completed: false }];
     newTodoName = '';
   }
 
