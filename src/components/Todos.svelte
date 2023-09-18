@@ -37,7 +37,9 @@
     } else if (filter === 'completed') {
       return todos.filter((t) => t.completed);
     } else if (pattern) {
-      return todos.filter((t) => t.name.toLowerCase().includes(pattern));
+      return todos.filter((t) =>
+        t.name.toLowerCase().includes(pattern.toLowerCase()),
+      );
     } else {
       return todos;
     }
