@@ -29,12 +29,15 @@
   }
 
   let filter = 'all';
+  let pattern = '';
 
-  const filterTodos = (filter, todos) => {
+  const filterTodos = (filter, todos, pattern) => {
     if (filter === 'active') {
       return todos.filter((t) => !t.completed);
     } else if (filter === 'completed') {
       return todos.filter((t) => t.completed);
+    } else if (pattern) {
+      return todos.filter((t) => t.name.toLowerCase().includes(pattern));
     } else {
       return todos;
     }
@@ -47,7 +50,7 @@
   <!-- NewTodo -->
   <form on:submit|preventDefault={addTodo}>
     <h2 class="label-wrapper">
-      <label for="todo-0" class="label__lg"> What needs to be done? </label>
+      <label for="todo-0" class="label__lg"> Add new todo </label>
     </h2>
     <input
       bind:value={newTodoName}
@@ -61,8 +64,23 @@
     </button>
   </form>
 
+  <!-- Search -->
+  <form>
+    <h2 class="label-wrapper">
+      <label for="search-pattern" class="label__lg">Search todos</label>
+    </h2>
+    <input
+      bind:value={pattern}
+      type="text"
+      id="search-pattern"
+      autocomplete="off"
+      class="input input__lg"
+    />
+  </form>
+
   <!-- Filter -->
-  <div class="filters btn-group stack-exception">
+  <div class="filters btn-group">
+    <h2 class="label__horizontal">Filters</h2>
     <button
       class="btn toggle-btn"
       aria-pressed={filter === 'all'}
@@ -102,7 +120,7 @@
 
   <!-- Todos -->
   <ul role="list" class="todo-list stack-large" aria-labelledby="list-heading">
-    {#each filterTodos(filter, todos) as todo (todo.id)}
+    {#each filterTodos(filter, todos, pattern) as todo (todo.id)}
       <li class="todo">
         <div class="stack-small">
           <div class="c-cb">

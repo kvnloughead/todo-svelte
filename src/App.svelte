@@ -8,4 +8,3 @@
 </script>
 
 <Todos {todos} />
-Svelte app
