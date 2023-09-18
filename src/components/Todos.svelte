@@ -27,6 +27,18 @@
   function removeCompleted() {
     todos = todos.filter((t) => !t.completed);
   }
+
+  let filter = 'all';
+
+  const filterTodos = (filter, todos) => {
+    if (filter === 'active') {
+      return todos.filter((t) => !t.completed);
+    } else if (filter === 'completed') {
+      return todos.filter((t) => t.completed);
+    } else {
+      return todos;
+    }
+  };
 </script>
 
 <h1>To-do list</h1>
@@ -51,17 +63,32 @@
 
   <!-- Filter -->
   <div class="filters btn-group stack-exception">
-    <button class="btn toggle-btn" aria-pressed="true">
+    <button
+      class="btn toggle-btn"
+      aria-pressed={filter === 'all'}
+      class:btn__primary={filter === 'all'}
+      on:click={() => (filter = 'all')}
+    >
       <span class="visually-hidden">Show</span>
       <span>All</span>
       <span class="visually-hidden">tasks</span>
     </button>
-    <button class="btn toggle-btn" aria-pressed="false">
+    <button
+      class="btn toggle-btn"
+      aria-pressed={filter === 'active'}
+      class:btn__primary={filter === 'active'}
+      on:click={() => (filter = 'active')}
+    >
       <span class="visually-hidden">Show</span>
       <span>Active</span>
       <span class="visually-hidden">tasks</span>
     </button>
-    <button class="btn toggle-btn" aria-pressed="false">
+    <button
+      class="btn toggle-btn"
+      aria-pressed={filter === 'completedkkk'}
+      class:btn__primary={filter === 'completed'}
+      on:click={() => (filter = 'completed')}
+    >
       <span class="visually-hidden">Show</span>
       <span>Completed</span>
       <span class="visually-hidden">tasks</span>
@@ -75,7 +102,7 @@
 
   <!-- Todos -->
   <ul role="list" class="todo-list stack-large" aria-labelledby="list-heading">
-    {#each todos as todo (todo.id)}
+    {#each filterTodos(filter, todos) as todo (todo.id)}
       <li class="todo">
         <div class="stack-small">
           <div class="c-cb">
