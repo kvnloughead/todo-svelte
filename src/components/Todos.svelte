@@ -32,14 +32,15 @@
   let pattern = '';
 
   const filterTodos = (filter, todos, pattern) => {
+    if (pattern) {
+      todos = todos.filter((t) =>
+        t.name.toLowerCase().includes(pattern.toLowerCase()),
+      );
+    }
     if (filter === 'active') {
       return todos.filter((t) => !t.completed);
     } else if (filter === 'completed') {
       return todos.filter((t) => t.completed);
-    } else if (pattern) {
-      return todos.filter((t) =>
-        t.name.toLowerCase().includes(pattern.toLowerCase()),
-      );
     } else {
       return todos;
     }
