@@ -1,4 +1,7 @@
 <script>
+  import FilterButton from './FilterButton.svelte';
+  import Search from './Search.svelte';
+
   export let todos = [];
 
   let newTodoName = '';
@@ -14,16 +17,13 @@
       newTodoId = Math.max(...todos.map((t) => t.id)) + 1;
     }
   }
-
   function addTodo() {
     todos = [...todos, { id: newTodoId, name: newTodoName, completed: false }];
     newTodoName = '';
   }
-
   function removeTodo(todo) {
     todos = todos.filter((t) => todo.id !== t.id);
   }
-
   function removeCompleted() {
     todos = todos.filter((t) => !t.completed);
   }
@@ -66,54 +66,8 @@
     </button>
   </form>
 
-  <!-- Search -->
-  <form>
-    <h2 class="label-wrapper">
-      <label for="search-pattern" class="label__lg">Search todos</label>
-    </h2>
-    <input
-      bind:value={pattern}
-      type="text"
-      id="search-pattern"
-      autocomplete="off"
-      class="input input__lg"
-    />
-  </form>
-
-  <!-- Filter -->
-  <div class="filters btn-group">
-    <h2 class="label__horizontal">Filters</h2>
-    <button
-      class="btn toggle-btn"
-      aria-pressed={filter === 'all'}
-      class:btn__primary={filter === 'all'}
-      on:click={() => (filter = 'all')}
-    >
-      <span class="visually-hidden">Show</span>
-      <span>All</span>
-      <span class="visually-hidden">tasks</span>
-    </button>
-    <button
-      class="btn toggle-btn"
-      aria-pressed={filter === 'active'}
-      class:btn__primary={filter === 'active'}
-      on:click={() => (filter = 'active')}
-    >
-      <span class="visually-hidden">Show</span>
-      <span>Active</span>
-      <span class="visually-hidden">tasks</span>
-    </button>
-    <button
-      class="btn toggle-btn"
-      aria-pressed={filter === 'completedkkk'}
-      class:btn__primary={filter === 'completed'}
-      on:click={() => (filter = 'completed')}
-    >
-      <span class="visually-hidden">Show</span>
-      <span>Completed</span>
-      <span class="visually-hidden">tasks</span>
-    </button>
-  </div>
+  <Search bind:pattern />
+  <FilterButton bind:filter />
 
   <!-- TodosStatus -->
   <h2 id="list-heading">
