@@ -46,6 +46,11 @@
       return todos;
     }
   };
+
+  function updateTodo(todo) {
+    const i = todos.findIndex((t) => t.id === todo.id);
+    todos[i] = { ...todos[i], ...todo };
+  }
 </script>
 
 <h1>To-do list</h1>
@@ -80,7 +85,11 @@
   <ul role="list" class="todo-list stack-large" aria-labelledby="list-heading">
     {#each filterTodos(filter, todos, pattern) as todo (todo.id)}
       <li class="todo">
-        <Todo {todo} on:remove={(e) => removeTodo(e.detail)} />
+        <Todo
+          {todo}
+          on:remove={(e) => removeTodo(e.detail)}
+          on:update={(e) => updateTodo(e.detail)}
+        />
       </li>
     {:else}
       <li>Nothing to do here!</li>
