@@ -30,9 +30,7 @@
     todos = todos.filter((t) => !t.completed);
   }
   function checkAll(completed) {
-    todos = todos.map((t) => {
-      return { ...t, completed };
-    });
+    todos = todos.map((t) => ({ ...t, completed }));
   }
 
   let filter = 'all';
@@ -105,6 +103,7 @@
   <hr />
 
   <MoreActions
+    {todos}
     on:checkAll={(evt) => checkAll(evt.detail)}
     on:removeCompleted={removeCompleted}
   />
