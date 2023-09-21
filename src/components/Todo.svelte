@@ -1,5 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import EscapeListener from './EscapeListener.svelte';
+
   const dispatch = createEventDispatcher();
 
   export let todo;
@@ -29,11 +31,7 @@
   }
 </script>
 
-<svelte:window
-  on:keydown={(e) => {
-    e.key === 'Escape' && onCancel();
-  }}
-/>
+<EscapeListener {onCancel} />
 
 <div class="stack-small">
   {#if editing}

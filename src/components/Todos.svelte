@@ -1,6 +1,7 @@
 <script>
   import FilterButton from './FilterButton.svelte';
   import MoreActions from './MoreActions.svelte';
+  import NewTodo from './NewTodo.svelte';
   import Search from './Search.svelte';
   import Todo from './Todo.svelte';
 
@@ -19,8 +20,8 @@
       newTodoId = Math.max(...todos.map((t) => t.id)) + 1;
     }
   }
-  function addTodo() {
-    todos = [...todos, { id: newTodoId, name: newTodoName, completed: false }];
+  function addTodo(name) {
+    todos = [...todos, { id: newTodoId, name, completed: false }];
     newTodoName = '';
   }
   function removeTodo(todo) {
@@ -60,23 +61,12 @@
 <h1>To-do list</h1>
 <!-- Todos.svelte -->
 <div class="todoapp stack-large">
-  <!-- NewTodo -->
-  <form on:submit|preventDefault={addTodo}>
-    <h2 class="label-wrapper">
-      <label for="todo-0" class="label__lg"> Add new todo </label>
-    </h2>
-    <input
-      bind:value={newTodoName}
-      type="text"
-      id="todo-0"
-      autocomplete="off"
-      class="input input__lg"
-    />
-    <button type="submit" disabled="" class="btn btn__primary btn__lg">
-      Add
-    </button>
-  </form>
-
+  <NewTodo
+    {newTodoName}
+    on:addTodo={(e) => {
+      addTodo(e.detail);
+    }}
+  />
   <Search bind:pattern />
   <FilterButton bind:filter />
 
@@ -104,7 +94,7 @@
 
   <MoreActions
     {todos}
-    on:checkAll={(evt) => checkAll(evt.detail)}
+    on:checkAll={(e) => checkAll(e.detail)}
     on:removeCompleted={removeCompleted}
   />
 </div>
