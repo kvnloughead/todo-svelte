@@ -1,6 +1,8 @@
 <script>
   import { createEventDispatcher, tick } from 'svelte';
+
   import EscapeListener from './EscapeListener.svelte';
+  import { selectOnFocus } from '../actions';
 
   const dispatch = createEventDispatcher();
 
@@ -52,6 +54,7 @@
         <input
           bind:value={name}
           bind:this={nameInputEl}
+          use:selectOnFocus
           type="text"
           id="todo-{todo.id}"
           autoComplete="off"
