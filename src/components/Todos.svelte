@@ -16,7 +16,6 @@
     if (totalTodos === 0) {
       newTodoId = 1;
     } else {
-      // make new ID one greater than largest existing id
       newTodoId = Math.max(...todos.map((t) => t.id)) + 1;
     }
   }
@@ -61,7 +60,7 @@
 </script>
 
 <h1>To-do list</h1>
-<!-- Todos.svelte -->
+
 <div class="todoapp stack-large">
   <NewTodo
     autofocus
@@ -78,7 +77,6 @@
     {completedTodos} out of {totalTodos} items completed
   </h2>
 
-  <!-- Todos -->
   <ul role="list" class="todo-list stack-large" aria-labelledby="list-heading">
     {#each filterTodos(filter, todos, pattern) as todo (todo.id)}
       <li class="todo">
