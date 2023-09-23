@@ -1,8 +1,9 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, tick } from 'svelte';
   const dispatch = createEventDispatcher();
 
   export let todos;
+  let checkAllBtnEl;
 
   $: allCompleted = todos.filter((t) => t.completed).length === todos.length;
   $: noneCompleted = todos.filter((t) => t.completed).length === 0;
@@ -10,9 +11,13 @@
   function checkAll() {
     dispatch('checkAll', true);
   }
-  function unCheckAll() {
+
+  async function unCheckAll() {
     dispatch('checkAll', false);
+    await tick();
+    checkAllBtnEl.focus();
   }
+
   function removeCompleted() {
     dispatch('removeCompleted');
   }
@@ -23,6 +28,7 @@
     type="button"
     disabled={todos.length === 0 || allCompleted}
     class="btn btn__primary"
+    bind:this={checkAllBtnEl}
     on:click={checkAll}>Check All</button
   >
   <button

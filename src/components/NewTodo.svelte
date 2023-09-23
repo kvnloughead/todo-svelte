@@ -1,16 +1,28 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import EscapeListener from './EscapeListener.svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
   const dispatch = createEventDispatcher();
+
+  import EscapeListener from './EscapeListener.svelte';
+
+  export let autofocus = false;
+  export let nameEl;
 
   let name = '';
 
   const addTodo = () => {
     dispatch('addTodo', name);
     name = '';
+    nameEl.focus();
   };
 
-  const onCancel = () => (name = '');
+  const onCancel = () => {
+    nameEl.focus();
+    name = '';
+  };
+
+  onMount(() => {
+    if (autofocus) nameEl.focus();
+  });
 </script>
 
 <EscapeListener {onCancel} />
@@ -20,6 +32,7 @@
   </h2>
   <input
     bind:value={name}
+    bind:this={nameEl}
     type="text"
     id="todo-0"
     autocomplete="off"

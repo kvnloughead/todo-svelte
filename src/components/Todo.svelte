@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, tick } from 'svelte';
   import EscapeListener from './EscapeListener.svelte';
 
   const dispatch = createEventDispatcher();
@@ -7,35 +7,43 @@
   export let todo;
   let editing = false;
   let name = todo.name;
+  let nameInputEl, editBtnEl;
 
   function update(updatedTodo) {
     todo = { ...todo, ...updatedTodo };
     dispatch('update', todo);
   }
-  function onCancel() {
+
+  async function onCancel() {
     name = todo.name;
     editing = false;
+    await tick();
+    editBtnEl.focus();
   }
+
   function onSave() {
     update({ name });
     editing = false;
   }
+
   function onRemove() {
     dispatch('remove', todo);
   }
-  function onEdit() {
+
+  async function onEdit() {
     editing = true;
+    await tick();
+    nameInputEl.focus();
   }
+
   function onToggle() {
     update({ completed: !todo.completed });
   }
 </script>
 
-<EscapeListener {onCancel} />
-
 <div class="stack-small">
   {#if editing}
-    <!-- markup for editing todo: label, input text, Cancel and Save Button -->
+    <EscapeListener {onCancel} />
     <form on:submit|preventDefault={onSave} class="stack-small">
       <div class="form-group">
         <label for="todo-{todo.id}" class="todo-label"
@@ -43,6 +51,7 @@
         >
         <input
           bind:value={name}
+          bind:this={nameInputEl}
           type="text"
           id="todo-{todo.id}"
           autoComplete="off"
@@ -74,7 +83,7 @@
       <label for="todo-{todo.id}" class="todo-label">{todo.name}</label>
     </div>
     <div class="btn-group">
-      <button type="button" class="btn" on:click={onEdit}>
+      <button type="button" class="btn" on:click={onEdit} bind:this={editBtnEl}>
         Edit<span class="visually-hidden"> {todo.name}</span>
       </button>
       <button type="button" class="btn btn__danger" on:click={onRemove}>

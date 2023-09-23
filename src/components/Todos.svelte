@@ -8,7 +8,7 @@
   export let todos = [];
 
   let newTodoName = '';
-  let newTodoId;
+  let newTodoId, nameEl;
 
   $: totalTodos = todos.length;
   $: completedTodos = todos.filter((todo) => todo.completed).length;
@@ -20,6 +20,7 @@
       newTodoId = Math.max(...todos.map((t) => t.id)) + 1;
     }
   }
+
   function addTodo(name) {
     todos = [...todos, { id: newTodoId, name, completed: false }];
     newTodoName = '';
@@ -29,6 +30,7 @@
   }
   function removeCompleted() {
     todos = todos.filter((t) => !t.completed);
+    nameEl.focus();
   }
   function checkAll(completed) {
     todos = todos.map((t) => ({ ...t, completed }));
@@ -62,7 +64,8 @@
 <!-- Todos.svelte -->
 <div class="todoapp stack-large">
   <NewTodo
-    {newTodoName}
+    autofocus
+    bind:nameEl
     on:addTodo={(e) => {
       addTodo(e.detail);
     }}
