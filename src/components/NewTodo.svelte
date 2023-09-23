@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher, onMount } from 'svelte';
+  import { selectOnFocus } from '../actions.js';
   const dispatch = createEventDispatcher();
 
   import EscapeListener from './EscapeListener.svelte';
@@ -19,18 +20,6 @@
     nameEl.focus();
     name = '';
   };
-
-  function selectOnFocus(node) {
-    if (node && typeof node.select === 'function') {
-      const onFocus = (e) => node.select();
-      node.addEventListener('focus', onFocus);
-      return {
-        destroy: () => {
-          node.removeEventListener('focus', onFocus);
-        },
-      };
-    }
-  }
 
   onMount(() => {
     if (autofocus) nameEl.focus();
