@@ -20,6 +20,18 @@
     name = '';
   };
 
+  function selectOnFocus(node) {
+    if (node && typeof node.select === 'function') {
+      const onFocus = (e) => node.select();
+      node.addEventListener('focus', onFocus);
+      return {
+        destroy: () => {
+          node.removeEventListener('focus', onFocus);
+        },
+      };
+    }
+  }
+
   onMount(() => {
     if (autofocus) nameEl.focus();
   });
@@ -33,6 +45,7 @@
   <input
     bind:value={name}
     bind:this={nameEl}
+    use:selectOnFocus
     type="text"
     id="todo-0"
     autocomplete="off"
