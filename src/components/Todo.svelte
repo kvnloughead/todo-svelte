@@ -9,18 +9,21 @@
   export let todo;
   let editing = false;
   let name = todo.name;
-  let nameInputEl, editBtnEl;
+  let editBtnPressed = false;
+  let nameInputEl;
+
+  function focusEditBtn(node) {
+    editBtnPressed && node.focus();
+  }
 
   function update(updatedTodo) {
     todo = { ...todo, ...updatedTodo };
     dispatch('update', todo);
   }
 
-  async function onCancel() {
+  function onCancel() {
     name = todo.name;
     editing = false;
-    await tick();
-    editBtnEl.focus();
   }
 
   function onSave() {
@@ -33,6 +36,7 @@
   }
 
   function onEdit() {
+    editBtnPressed = true;
     editing = true;
   }
 
@@ -85,7 +89,7 @@
       <label for="todo-{todo.id}" class="todo-label">{todo.name}</label>
     </div>
     <div class="btn-group">
-      <button type="button" class="btn" on:click={onEdit} bind:this={editBtnEl}>
+      <button type="button" class="btn" on:click={onEdit} use:focusEditBtn>
         Edit<span class="visually-hidden"> {todo.name}</span>
       </button>
       <button type="button" class="btn btn__danger" on:click={onRemove}>
