@@ -9,7 +9,7 @@
   export let todos = [];
 
   let newTodoName = '';
-  let newTodoId, nameEl;
+  let newTodoId, nameEl, todosStatus;
 
   $: newTodoId = todos.length ? Math.max(...todos.map((t) => t.id)) + 1 : 1;
 
@@ -19,10 +19,11 @@
   }
   function removeTodo(todo) {
     todos = todos.filter((t) => todo.id !== t.id);
+    todosStatus.focus();
   }
   function removeCompleted() {
     todos = todos.filter((t) => !t.completed);
-    nameEl.focus();
+    todosStatus.focus();
   }
   function checkAll(completed) {
     todos = todos.map((t) => ({ ...t, completed }));
@@ -63,7 +64,7 @@
   />
   <Search bind:pattern />
   <FilterButton bind:filter />
-  <TodosStatus {todos} />
+  <TodosStatus {todos} bind:this={todosStatus} />
 
   <ul role="list" class="todo-list stack-large" aria-labelledby="list-heading">
     {#each filterTodos(filter, todos, pattern) as todo (todo.id)}
