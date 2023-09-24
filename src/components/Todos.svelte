@@ -4,21 +4,14 @@
   import NewTodo from './NewTodo.svelte';
   import Search from './Search.svelte';
   import Todo from './Todo.svelte';
+  import TodosStatus from './TodosStatus.svelte';
 
   export let todos = [];
 
   let newTodoName = '';
   let newTodoId, nameEl;
 
-  $: totalTodos = todos.length;
-  $: completedTodos = todos.filter((todo) => todo.completed).length;
-  $: {
-    if (totalTodos === 0) {
-      newTodoId = 1;
-    } else {
-      newTodoId = Math.max(...todos.map((t) => t.id)) + 1;
-    }
-  }
+  $: newTodoId = todos.length ? Math.max(...todos.map((t) => t.id)) + 1 : 1;
 
   function addTodo(name) {
     todos = [...todos, { id: newTodoId, name, completed: false }];
@@ -70,11 +63,7 @@
   />
   <Search bind:pattern />
   <FilterButton bind:filter />
-
-  <!-- TodosStatus -->
-  <h2 id="list-heading">
-    {completedTodos} out of {totalTodos} items completed
-  </h2>
+  <TodosStatus {todos} />
 
   <ul role="list" class="todo-list stack-large" aria-labelledby="list-heading">
     {#each filterTodos(filter, todos, pattern) as todo (todo.id)}
