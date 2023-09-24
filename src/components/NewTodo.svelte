@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher, onMount } from 'svelte';
-  import { selectOnFocus } from '../actions.js';
+  import { focusOnInit, selectOnFocus } from '../actions.js';
   const dispatch = createEventDispatcher();
 
   import EscapeListener from './EscapeListener.svelte';
@@ -20,10 +20,6 @@
     nameEl.focus();
     name = '';
   };
-
-  onMount(() => {
-    if (autofocus) nameEl.focus();
-  });
 </script>
 
 <EscapeListener {onCancel} />
@@ -35,6 +31,7 @@
     bind:value={name}
     bind:this={nameEl}
     use:selectOnFocus
+    use:focusOnInit
     type="text"
     id="todo-0"
     autocomplete="off"

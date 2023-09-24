@@ -63,7 +63,6 @@
 
 <div class="todoapp stack-large">
   <NewTodo
-    autofocus
     bind:nameEl
     on:addTodo={(e) => {
       addTodo(e.detail);

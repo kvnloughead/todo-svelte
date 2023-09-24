@@ -2,7 +2,7 @@
   import { createEventDispatcher, tick } from 'svelte';
 
   import EscapeListener from './EscapeListener.svelte';
-  import { selectOnFocus } from '../actions';
+  import { focusOnInit, selectOnFocus } from '../actions';
 
   const dispatch = createEventDispatcher();
 
@@ -32,10 +32,8 @@
     dispatch('remove', todo);
   }
 
-  async function onEdit() {
+  function onEdit() {
     editing = true;
-    await tick();
-    nameInputEl.focus();
   }
 
   function onToggle() {
@@ -55,6 +53,7 @@
           bind:value={name}
           bind:this={nameInputEl}
           use:selectOnFocus
+          use:focusOnInit
           type="text"
           id="todo-{todo.id}"
           autoComplete="off"

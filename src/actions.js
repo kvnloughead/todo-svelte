@@ -1,10 +1,27 @@
+/**
+ * Adds listener to DOM node that selects all text in the node on focus.
+ *
+ * @param {Node} node - a DOM node
+ * @returns a callback that removes the listener
+ */
 export function selectOnFocus(node) {
   if (node && typeof node.select === 'function') {
-    // make sure node is defined and has a select() method
-    const onFocus = (event) => node.select(); // event handler
-    node.addEventListener('focus', onFocus); // when node gets focus call onFocus()
+    const onFocus = () => node.select();
+    node.addEventListener('focus', onFocus);
     return {
-      destroy: () => node.removeEventListener('focus', onFocus), // this will be executed when the node is removed from the DOM
+      destroy: () => node.removeEventListener('focus', onFocus),
     };
+  }
+}
+
+/**
+ * Focus on DOM node on initialization.
+ *
+ * @param {Node} node - a DOM node
+ * @param {Boolean} focus - whether or not to focus on initialization
+ */
+export function focusOnInit(node) {
+  if (node && typeof node.focus === 'function') {
+    node.focus();
   }
 }
