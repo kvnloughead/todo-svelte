@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher, tick } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
 
   import EscapeListener from './EscapeListener.svelte';
   import { focusOnInit, selectOnFocus } from '../actions';
