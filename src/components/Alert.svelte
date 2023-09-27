@@ -30,6 +30,7 @@
 
 {#if visible}
   <button
+    role={alert}
     on:click={removeAlert}
     on:keydown={(e) => {
       if (e.key === 'Escape') removeAlert();
