@@ -65,9 +65,11 @@
   }
 </script>
 
-<h1>To-do list</h1>
+<header>
+  <h1>To-do list</h1>
+</header>
 
-<div class="todoapp stack-large">
+<main class="todoapp stack-large">
   <NewTodo
     bind:nameEl
     on:addTodo={(e) => {
@@ -99,4 +101,4 @@
     on:checkAll={(e) => checkAll(e.detail)}
     on:removeCompleted={removeCompleted}
   />
-</div>
+</main>
