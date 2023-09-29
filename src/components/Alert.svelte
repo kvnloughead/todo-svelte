@@ -1,5 +1,6 @@
 <script>
   import { onDestroy } from 'svelte';
+  import { fly } from 'svelte/transition';
   import { alert } from '../stores.js';
 
   export let ms = 3000;
@@ -31,6 +32,7 @@
 {#if visible}
   <button
     role={alert}
+    transition:fly={{ delay: 250, duration: 300, x: 0, y: -100, opacity: 0.5 }}
     on:click={removeAlert}
     on:keydown={(e) => {
       if (e.key === 'Escape') removeAlert();
@@ -49,8 +51,9 @@
   button {
     position: fixed;
     cursor: pointer;
-    margin: 1rem 1.5rem 0;
+    margin: 0.6rem 1.5rem 0;
     right: 0;
+    top: 2rem;
     display: flex;
     align-items: center;
     border-radius: 0.2rem;
