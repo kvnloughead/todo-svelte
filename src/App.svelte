@@ -1,13 +1,8 @@
 <script>
   import Todos from './components/Todos.svelte';
   import Alert from './components/Alert.svelte';
-
-  let todos = [
-    { id: 1, name: 'Create a Svelte starter app', completed: true },
-    { id: 2, name: 'Create first component', completed: true },
-    { id: 3, name: 'Complete rest of tutorial', completed: false },
-  ];
+  import { todos } from './stores';
 </script>
 
 <Alert />
-<Todos {todos} />
+<Todos bind:todos={$todos} />
