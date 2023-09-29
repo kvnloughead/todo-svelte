@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   export let filter = 'all';
   export let onclick = (filter) => {};
   $: onclick(filter);

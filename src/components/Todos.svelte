@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import FilterButton from './FilterButton.svelte';
   import MoreActions from './MoreActions.svelte';
   import NewTodo from './NewTodo.svelte';

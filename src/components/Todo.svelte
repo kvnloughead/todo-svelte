@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { createEventDispatcher } from 'svelte';
 
   import EscapeListener from './EscapeListener.svelte';

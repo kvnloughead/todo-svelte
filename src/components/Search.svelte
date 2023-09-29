@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   export let pattern = '';
   export let onclick = (pattern) => {};
   $: onclick(pattern);
