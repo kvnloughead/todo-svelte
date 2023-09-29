@@ -4,7 +4,7 @@
   import { alert } from '../stores.js';
 
   export let ms = 3000;
-  let visible, timeout;
+  let visible: boolean, timeout: number;
 
   const removeAlert = () => {
     $alert = '';
@@ -30,13 +30,10 @@
 </script>
 
 {#if visible}
-  <button
-    role={alert}
+  <div
+    class="alert"
+    role="status"
     transition:fly={{ delay: 250, duration: 300, x: 0, y: -100, opacity: 0.5 }}
-    on:click={removeAlert}
-    on:keydown={(e) => {
-      if (e.key === 'Escape') removeAlert();
-    }}
   >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
       ><path
@@ -44,16 +41,13 @@
       /></svg
     >
     {$alert}
-  </button>
+  </div>
 {/if}
 
 <style>
-  button {
-    position: fixed;
+  div {
     cursor: pointer;
     margin: 0.6rem 1.5rem 0;
-    right: 0;
-    top: 2rem;
     display: flex;
     align-items: center;
     border-radius: 0.2rem;
@@ -66,7 +60,7 @@
     opacity: 95%;
   }
 
-  button svg {
+  div svg {
     height: 1.6rem;
     fill: currentcolor;
     width: 1.4rem;

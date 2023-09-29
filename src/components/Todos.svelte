@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Alert from './Alert.svelte';
   import FilterButton from './FilterButton.svelte';
   import MoreActions from './MoreActions.svelte';
   import NewTodo from './NewTodo.svelte';
@@ -66,6 +67,7 @@
 </script>
 
 <header>
+  <Alert />
   <h1>To-do list</h1>
 </header>
 

@@ -73,8 +73,15 @@ body {
 
 /* GLOBAL STYLES */
 header {
+  position: relative;
   padding: 3rem 2rem;
 }
+header .alert {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+}
+
 .form-group > input[type='text'] {
   display: inline-block;
   margin-top: 0.4rem;
