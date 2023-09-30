@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onDestroy } from 'svelte';
   import { fly } from 'svelte/transition';
-  import { alert } from '../stores.js';
+  import { alert } from '../stores';
 
   export let ms = 3000;
   let visible: boolean, timeout: number;

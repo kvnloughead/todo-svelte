@@ -2,8 +2,10 @@
   import { createEventDispatcher, tick } from 'svelte';
   const dispatch = createEventDispatcher();
 
-  export let todos;
-  let checkAllBtnEl;
+  import type { TodoType } from '../types/todo.type';
+
+  export let todos: TodoType[];
+  let checkAllBtnEl: HTMLButtonElement;
 
   $: allCompleted = todos.filter((t) => t.completed).length === todos.length;
   $: noneCompleted = todos.filter((t) => t.completed).length === 0;

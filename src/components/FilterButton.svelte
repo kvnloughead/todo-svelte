@@ -1,6 +1,9 @@
 <script lang="ts">
-  export let filter = 'all';
-  export let onclick = (filter) => {};
+  import { Filter } from '../types/filter.enum';
+
+  export let filter: Filter = Filter.ALL;
+  export let onclick = (filter: Filter) => {};
+
   $: onclick(filter);
 </script>
 
@@ -8,9 +11,9 @@
   <h2 class="label__horizontal">Filters</h2>
   <button
     class="btn toggle-btn"
-    aria-pressed={filter === 'all'}
-    class:btn__primary={filter === 'all'}
-    on:click={() => (filter = 'all')}
+    aria-pressed={filter === Filter.ALL}
+    class:btn__primary={filter === Filter.ALL}
+    on:click={() => (filter = Filter.ALL)}
   >
     <span class="visually-hidden">Show</span>
     <span>All</span>
@@ -18,9 +21,9 @@
   </button>
   <button
     class="btn toggle-btn"
-    aria-pressed={filter === 'active'}
-    class:btn__primary={filter === 'active'}
-    on:click={() => (filter = 'active')}
+    aria-pressed={filter === Filter.ACTIVE}
+    class:btn__primary={filter === Filter.ACTIVE}
+    on:click={() => (filter = Filter.ACTIVE)}
   >
     <span class="visually-hidden">Show</span>
     <span>Active</span>
@@ -28,9 +31,9 @@
   </button>
   <button
     class="btn toggle-btn"
-    aria-pressed={filter === 'completedkkk'}
-    class:btn__primary={filter === 'completed'}
-    on:click={() => (filter = 'completed')}
+    aria-pressed={filter === Filter.COMPLETED}
+    class:btn__primary={filter === Filter.COMPLETED}
+    on:click={() => (filter = Filter.COMPLETED)}
   >
     <span class="visually-hidden">Show</span>
     <span>Completed</span>

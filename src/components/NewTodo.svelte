@@ -5,7 +5,7 @@
 
   import EscapeListener from './EscapeListener.svelte';
 
-  export let nameEl;
+  export let nameEl: HTMLElement;
 
   let name = '';
 

@@ -1,22 +1,22 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
 
+  import type { TodoType } from '../types/todo.type';
   import EscapeListener from './EscapeListener.svelte';
   import { focusOnInit, selectOnFocus } from '../actions';
 
-  const dispatch = createEventDispatcher();
-
-  export let todo;
+  export let todo: TodoType;
   let editing = false;
   let name = todo.name;
   let editBtnPressed = false;
-  let nameInputEl;
+  let nameInputEl: HTMLElement;
 
-  function focusEditBtn(node) {
+  function focusEditBtn(node: HTMLElement) {
     editBtnPressed && node.focus();
   }
 
-  function update(updatedTodo) {
+  function update(updatedTodo: Partial<TodoType>) {
     todo = { ...todo, ...updatedTodo };
     dispatch('update', todo);
   }

@@ -1,6 +1,6 @@
 <script lang="ts">
   export let pattern = '';
-  export let onclick = (pattern) => {};
+  export let onclick = (pattern: string) => {};
   $: onclick(pattern);
 </script>
 
