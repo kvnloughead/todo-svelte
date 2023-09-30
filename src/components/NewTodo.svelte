@@ -1,11 +1,10 @@
 <script lang="ts">
-  import { createEventDispatcher, onMount } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
   import { focusOnInit, selectOnFocus } from '../actions.js';
   const dispatch = createEventDispatcher();
 
   import EscapeListener from './EscapeListener.svelte';
 
-  export let autofocus = false;
   export let nameEl;
 
   let name = '';

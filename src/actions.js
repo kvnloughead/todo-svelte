@@ -18,7 +18,6 @@ export function selectOnFocus(node) {
  * Focus on DOM node on initialization.
  *
  * @param {Node} node - a DOM node
- * @param {Boolean} focus - whether or not to focus on initialization
  */
 export function focusOnInit(node) {
   if (node && typeof node.focus === 'function') {
