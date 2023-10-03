@@ -3,5 +3,27 @@
 
   "include": ["src/**/*"],
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
-  "compilerOptions": { "ignoreDeprecations": "5.0" }
+  "compilerOptions": {
+    "strict": true, // Enable all strict type-checking options
+    "noImplicitAny": true, // Raise error on expressions and declarations with an implied 'any' type
+    "strictNullChecks": true, // Enable strict null checks
+    "strictFunctionTypes": true, // Enable strict checking of function types
+    "strictBindCallApply": true, // Enable strict 'bind', 'call', and 'apply' methods on functions
+    "strictPropertyInitialization": true, // Ensure non-undefined class properties are initialized in the constructor
+    "noImplicitThis": true, // Raise error on 'this' expressions with an implied 'any' type
+    "alwaysStrict": true, // Parse in strict mode and emit "use strict" for each source file
+    "noUnusedLocals": true, // Report errors on unused locals
+    "noUnusedParameters": true, // Report errors on unused parameters
+    "noImplicitReturns": true, // Report error when not all code paths in function return a value
+    "noFallthroughCasesInSwitch": true, // Report errors for fallthrough cases in switch statement
+
+    // Additional checks
+    "esModuleInterop": true, // Enables emitting and checking of ES6-style default imports and exports
+    "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file
+    "moduleResolution": "node", // Resolve modules using Node.js style
+    "module": "esnext", // Use ESNext as module system (you can change this depending on your target)
+    "target": "esnext", // Target latest ES version (you can change this depending on your target)
+
+    "ignoreDeprecations": "5.0"
+  }
 }
