@@ -1,21 +1,21 @@
 <script lang="ts">
-  import { Filter } from '../types/filter.enum';
-  import type { TodoType } from '../types/todo.type';
-  import { alert } from '../stores';
+  import { Filter } from "../types/filter.enum";
+  import type { TodoType } from "../types/todo.type";
+  import { alert } from "../stores";
 
-  import Alert from './Alert.svelte';
-  import FilterButton from './FilterButton.svelte';
-  import MoreActions from './MoreActions.svelte';
-  import NewTodo from './NewTodo.svelte';
-  import Search from './Search.svelte';
-  import Todo from './Todo.svelte';
-  import TodosStatus from './TodosStatus.svelte';
+  import Alert from "./Alert.svelte";
+  import FilterButton from "./FilterButton.svelte";
+  import MoreActions from "./MoreActions.svelte";
+  import NewTodo from "./NewTodo.svelte";
+  import Search from "./Search.svelte";
+  import Todo from "./Todo.svelte";
+  import TodosStatus from "./TodosStatus.svelte";
 
-  export let todos: TodoType[] = [];
+  export let todos: TodoType[];
 
-  let newTodoName = '';
+  let newTodoName = "";
   let newTodoId: number, nameEl: HTMLElement, todosStatus: TodosStatus;
-  let pattern = '';
+  let pattern = "";
 
   $: $alert = `Browsing ${filter} todos`;
   $: newTodoId = todos.length ? Math.max(...todos.map((t) => t.id)) + 1 : 1;
@@ -23,7 +23,7 @@
   function addTodo(name: string) {
     todos = [...todos, { id: newTodoId, name, completed: false }];
     $alert = `Added todo: '${name}'`;
-    newTodoName = '';
+    newTodoName = "";
   }
 
   function removeTodo(todo: TodoType) {
@@ -40,7 +40,7 @@
 
   function checkAll(completed: boolean) {
     todos = todos.map((t) => ({ ...t, completed }));
-    $alert = `${completed ? 'Checked' : 'Unchecked'} all todos`;
+    $alert = `${completed ? "Checked" : "Unchecked"} all todos`;
   }
 
   let filter = Filter.ALL;
@@ -65,7 +65,7 @@
       $alert = `Todo '${todos[i].name}' has been renamed to '${todos[i].name}'`;
     } else if (todos[i].completed !== todo.completed) {
       $alert = `Todo '${todo.name}' has been marked ${
-        todo.completed ? 'completed' : 'active'
+        todo.completed ? "completed" : "active"
       }`;
     }
     todos[i] = { ...todos[i], ...todo };
