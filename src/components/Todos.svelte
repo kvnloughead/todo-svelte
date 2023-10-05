@@ -12,9 +12,11 @@
   import TodosStatus from "./TodosStatus.svelte";
   import Keybindings from "./Keybindings.svelte";
 
-  const focusOnNewTodo = (evt: KeyboardEvent) => {
-    evt.preventDefault();
-    nameEl.focus();
+  const shortcutHandlers = {
+    n: (evt: KeyboardEvent) => {
+      evt.preventDefault();
+      nameEl.focus();
+    },
   };
 
   export let todos: TodoType[];
@@ -77,7 +79,7 @@
   }
 </script>
 
-<Keybindings onNewTodoFocus={focusOnNewTodo} />
+<Keybindings handlers={shortcutHandlers} />
 
 <header>
   <Alert />
