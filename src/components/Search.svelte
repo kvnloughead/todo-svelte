@@ -1,5 +1,10 @@
 <script lang="ts">
   export let pattern = "";
+  let inputEl: HTMLElement;
+
+  export function focus() {
+    inputEl.focus();
+  }
 </script>
 
 <form>
@@ -8,6 +13,7 @@
   </h2>
   <input
     bind:value={pattern}
+    bind:this={inputEl}
     type="text"
     id="search-pattern"
     autocomplete="off"

@@ -17,12 +17,17 @@
       evt.preventDefault();
       nameEl.focus();
     },
+    s: (evt: KeyboardEvent) => {
+      evt.preventDefault();
+      search.focus();
+    },
   };
 
   export let todos: TodoType[];
 
   let newTodoId: number, nameEl: HTMLElement;
   let todosStatus: TodosStatus;
+  let search: Search;
   let pattern = "";
 
   $: $alert = `Browsing ${filter} todos`;
@@ -93,7 +98,7 @@
       addTodo(e.detail);
     }}
   />
-  <Search bind:pattern />
+  <Search bind:pattern bind:this={search} />
   <FilterButton bind:filter />
   <TodosStatus {todos} bind:this={todosStatus} />
 
