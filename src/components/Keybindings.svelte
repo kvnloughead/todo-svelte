@@ -3,6 +3,9 @@
   export let handlers;
 
   const handleKeydown = (evt) => {
+    if (evt.target.tagName === "INPUT" || evt.target.tagName === "TEXTAREA") {
+      return;
+    }
     if (evt.key in handlers) {
       handlers[evt.key](evt);
     }

@@ -3,8 +3,6 @@
   import { focusOnInit, selectOnFocus } from "../actions.js";
   const dispatch = createEventDispatcher();
 
-  import EscapeListener from "./EscapeListener.svelte";
-
   export let nameEl: HTMLElement;
 
   let name = "";
@@ -14,14 +12,8 @@
     name = "";
     nameEl.focus();
   };
-
-  const onCancel = () => {
-    nameEl.focus();
-    name = "";
-  };
 </script>
 
-<EscapeListener {onCancel} />
 <form on:submit|preventDefault={addTodo}>
   <h2 class="label-wrapper">
     <label for="todo-0" class="label__lg"> Add new todo </label>
