@@ -1,17 +1,17 @@
 <script lang="ts">
-  import { onDestroy } from 'svelte';
-  import { fly } from 'svelte/transition';
-  import { alert } from '../stores';
+  import { onDestroy } from "svelte";
+  import { fly } from "svelte/transition";
+  import { alert } from "../stores";
 
   export let ms = 3000;
   let visible: boolean, timeout: number;
 
   const removeAlert = () => {
-    $alert = '';
+    $alert = "";
     visible = false;
   };
 
-  const onMessageChange = (message, ms) => {
+  const onMessageChange = (message: string, ms: number) => {
     clearTimeout(timeout);
     if (!message) {
       removeAlert();

@@ -1,16 +1,15 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
 
-  import type { TodoType } from '../types/todo.type';
-  import EscapeListener from './EscapeListener.svelte';
-  import { focusOnInit, selectOnFocus } from '../actions';
+  import type { TodoType } from "../types/todo.type";
+  import EscapeListener from "./EscapeListener.svelte";
+  import { focusOnInit, selectOnFocus } from "../actions";
 
   export let todo: TodoType;
   let editing = false;
   let name = todo.name;
   let editBtnPressed = false;
-  let nameInputEl: HTMLElement;
 
   function focusEditBtn(node: HTMLElement) {
     editBtnPressed && node.focus();
@@ -18,7 +17,7 @@
 
   function update(updatedTodo: Partial<TodoType>) {
     todo = { ...todo, ...updatedTodo };
-    dispatch('update', todo);
+    dispatch("update", todo);
   }
 
   function onCancel() {
@@ -32,7 +31,7 @@
   }
 
   function onRemove() {
-    dispatch('remove', todo);
+    dispatch("remove", todo);
   }
 
   function onEdit() {
@@ -55,7 +54,6 @@
         >
         <input
           bind:value={name}
-          bind:this={nameInputEl}
           use:selectOnFocus
           use:focusOnInit
           type="text"

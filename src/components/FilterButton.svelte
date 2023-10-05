@@ -1,10 +1,7 @@
 <script lang="ts">
-  import { Filter } from '../types/filter.enum';
+  import { Filter } from "../types/filter.enum";
 
   export let filter: Filter = Filter.ALL;
-  export let onclick = (filter: Filter) => {};
-
-  $: onclick(filter);
 </script>
 
 <div class="filters btn-group">

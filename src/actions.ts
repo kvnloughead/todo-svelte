@@ -5,13 +5,14 @@
  * @returns a callback that removes the listener
  */
 export function selectOnFocus(node: HTMLInputElement) {
-  if (node && typeof node.select === 'function') {
+  if (node && typeof node.select === "function") {
     const onFocus = () => node.select();
-    node.addEventListener('focus', onFocus);
+    node.addEventListener("focus", onFocus);
     return {
-      destroy: () => node.removeEventListener('focus', onFocus),
+      destroy: () => node.removeEventListener("focus", onFocus),
     };
   }
+  return;
 }
 
 /**
@@ -20,7 +21,7 @@ export function selectOnFocus(node: HTMLInputElement) {
  * @param {Node} node - a DOM node
  */
 export function focusOnInit(node: HTMLInputElement) {
-  if (node && typeof node.focus === 'function') {
+  if (node && typeof node.focus === "function") {
     node.focus();
   }
 }

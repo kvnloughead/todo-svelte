@@ -13,7 +13,6 @@
 
   export let todos: TodoType[];
 
-  let newTodoName = "";
   let newTodoId: number, nameEl: HTMLElement, todosStatus: TodosStatus;
   let pattern = "";
 
@@ -23,7 +22,6 @@
   function addTodo(name: string) {
     todos = [...todos, { id: newTodoId, name, completed: false }];
     $alert = `Added todo: '${name}'`;
-    newTodoName = "";
   }
 
   function removeTodo(todo: TodoType) {

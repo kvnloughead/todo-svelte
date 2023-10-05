@@ -1,7 +1,5 @@
 <script lang="ts">
-  export let pattern = '';
-  export let onclick = (pattern: string) => {};
-  $: onclick(pattern);
+  export let pattern = "";
 </script>
 
 <form>
