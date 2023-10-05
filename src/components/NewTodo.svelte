@@ -1,23 +1,23 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-  import { focusOnInit, selectOnFocus } from '../actions.js';
+  import { createEventDispatcher } from "svelte";
+  import { focusOnInit, selectOnFocus } from "../actions.js";
   const dispatch = createEventDispatcher();
 
-  import EscapeListener from './EscapeListener.svelte';
+  import EscapeListener from "./EscapeListener.svelte";
 
   export let nameEl: HTMLElement;
 
-  let name = '';
+  let name = "";
 
   const addTodo = () => {
-    dispatch('addTodo', name);
-    name = '';
+    dispatch("addTodo", name);
+    name = "";
     nameEl.focus();
   };
 
   const onCancel = () => {
     nameEl.focus();
-    name = '';
+    name = "";
   };
 </script>
 

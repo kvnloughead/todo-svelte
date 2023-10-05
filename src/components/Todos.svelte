@@ -10,10 +10,17 @@
   import Search from "./Search.svelte";
   import Todo from "./Todo.svelte";
   import TodosStatus from "./TodosStatus.svelte";
+  import Keybindings from "./Keybindings.svelte";
+
+  const focusOnNewTodo = (evt: KeyboardEvent) => {
+    evt.preventDefault();
+    nameEl.focus();
+  };
 
   export let todos: TodoType[];
 
-  let newTodoId: number, nameEl: HTMLElement, todosStatus: TodosStatus;
+  let newTodoId: number, nameEl: HTMLElement;
+  let todosStatus: TodosStatus;
   let pattern = "";
 
   $: $alert = `Browsing ${filter} todos`;
@@ -69,6 +76,8 @@
     todos[i] = { ...todos[i], ...todo };
   }
 </script>
+
+<Keybindings onNewTodoFocus={focusOnNewTodo} />
 
 <header>
   <Alert />
