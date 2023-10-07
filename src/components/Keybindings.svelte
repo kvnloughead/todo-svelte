@@ -3,12 +3,32 @@
   export let handlers;
 
   const handleKeydown = (evt) => {
+    debugger;
     if (evt.target.tagName === "INPUT" || evt.target.tagName === "TEXTAREA") {
       return;
     }
-    if (evt.key in handlers) {
-      handlers[evt.key](evt);
+
+    for (const keyCombo in handlers) {
+      if (matchesKeyCombo(evt, keyCombo)) {
+        evt.preventDefault();
+        handlers[keyCombo](evt);
+        return;
+      }
     }
+  };
+
+  const matchesKeyCombo = (evt, keyCombo) => {
+    const modifiers = ["ctrl", "alt", "shift", "meta"];
+    const keys = keyCombo.toLowerCase().split("+");
+    const key = keys.pop();
+
+    const hasModifier = (modifier) =>
+      keys.includes(modifier) ? evt[`${modifier}Key`] : !evt[`${modifier}Key`];
+
+    return (
+      key === evt.key.toLowerCase() &&
+      modifiers.every((mod) => hasModifier(mod))
+    );
   };
 </script>
 

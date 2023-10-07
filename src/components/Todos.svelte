@@ -13,7 +13,7 @@
   import Keybindings from "./Keybindings.svelte";
 
   const shortcutHandlers = {
-    n: (evt: KeyboardEvent) => {
+    "ctrl+alt+shift+n": (evt: KeyboardEvent) => {
       evt.preventDefault();
       nameEl.focus();
     },
