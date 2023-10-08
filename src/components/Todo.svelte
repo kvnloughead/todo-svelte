@@ -62,18 +62,22 @@
           class="todo-text"
         />
       </div>
-      <div class="btn-group">
-        <button class="btn todo-cancel" on:click={onCancel} type="button">
-          Cancel<span class="visually-hidden">renaming {todo.name}</span>
-        </button>
-        <button
-          class="btn btn__primary todo-edit"
-          type="submit"
-          disabled={!name}
-        >
-          Save<span class="visually-hidden">new name for {todo.name}</span>
-        </button>
-      </div>
+      <ul class="btn-group">
+        <li>
+          <button class="btn todo-cancel" on:click={onCancel} type="button">
+            Cancel<span class="visually-hidden">renaming {todo.name}</span>
+          </button>
+        </li>
+        <li>
+          <button
+            class="btn btn__primary todo-edit"
+            type="submit"
+            disabled={!name}
+          >
+            Save<span class="visually-hidden">new name for {todo.name}</span>
+          </button>
+        </li>
+      </ul>
     </form>
   {:else}
     <!-- markup for displaying todo: checkbox, label, Edit and Delete Button -->
