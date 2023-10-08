@@ -2,9 +2,14 @@
   import { Filter } from "../types/filter.enum";
 
   export let filter: Filter = Filter.ALL;
+  let filtersEl: HTMLElement;
+
+  export function focus() {
+    filtersEl.querySelector("button")?.focus();
+  }
 </script>
 
-<div class="filters btn-group">
+<div class="filters btn-group" bind:this={filtersEl}>
   <h2 class="label__horizontal">Filters</h2>
   <button
     class="btn toggle-btn"

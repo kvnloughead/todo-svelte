@@ -13,13 +13,17 @@
   import Keybindings from "./Keybindings.svelte";
 
   const shortcutHandlers = {
-    "ctrl+alt+shift+n": (evt: KeyboardEvent) => {
+    ["ctrl+alt+n"]: (evt: KeyboardEvent) => {
       evt.preventDefault();
       nameEl.focus();
     },
-    s: (evt: KeyboardEvent) => {
+    ["ctrl+alt+s"]: (evt: KeyboardEvent) => {
       evt.preventDefault();
-      search.focus();
+      searchInstance.focus();
+    },
+    ["ctrl+alt+f"]: (evt: KeyboardEvent) => {
+      evt.preventDefault();
+      filterInstance.focus();
     },
   };
 
@@ -27,7 +31,8 @@
 
   let newTodoId: number, nameEl: HTMLElement;
   let todosStatus: TodosStatus;
-  let search: Search;
+  let searchInstance: Search;
+  let filterInstance: FilterButton;
   let pattern = "";
 
   $: $alert = `Browsing ${filter} todos`;
@@ -98,8 +103,8 @@
       addTodo(e.detail);
     }}
   />
-  <Search bind:pattern bind:this={search} />
-  <FilterButton bind:filter />
+  <Search bind:pattern bind:this={searchInstance} />
+  <FilterButton bind:filter bind:this={filterInstance} />
   <TodosStatus {todos} bind:this={todosStatus} />
 
   <ul role="list" class="todo-list stack-large" aria-labelledby="list-heading">
