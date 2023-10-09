@@ -14,24 +14,31 @@
   import CommandPalette from "./CommandPalette.svelte";
 
   const shortcutHandlers = {
-    ["ctrl+alt+n"]: (evt: KeyboardEvent) => {
-      evt.preventDefault();
+    ["ctrl+alt+n"]: () => {
       nameEl.focus();
     },
-    ["ctrl+alt+s"]: (evt: KeyboardEvent) => {
-      evt.preventDefault();
+    ["ctrl+alt+s"]: () => {
       searchInstance.focus();
     },
-    ["ctrl+alt+f"]: (evt: KeyboardEvent) => {
-      evt.preventDefault();
+    ["ctrl+alt+f"]: () => {
       filterInstance.focus();
     },
+    ["ctrl+k"]: () => {
+      cmdPalette.focus();
+    },
+  };
+
+  const commands = {
+    ["check all"]: () => checkAll(true),
+    ["uncheck all"]: () => checkAll(false),
+    ["remove completed"]: () => removeCompleted(),
   };
 
   export let todos: TodoType[];
 
   let newTodoId: number, nameEl: HTMLElement;
   let todosStatus: TodosStatus;
+  let cmdPalette: CommandPalette;
   let searchInstance: Search;
   let filterInstance: FilterButton;
   let pattern = "";
@@ -100,7 +107,7 @@
 </header>
 
 <main class="todoapp stack-large">
-  <CommandPalette prompt={">"} />
+  <CommandPalette prompt={">"} bind:this={cmdPalette} {commands} />
   <NewTodo
     bind:nameEl
     on:addTodo={(e) => {

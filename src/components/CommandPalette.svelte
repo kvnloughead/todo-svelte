@@ -1,13 +1,32 @@
 <script lang="ts">
   export let prompt = "";
   export let label = "Command Palette";
+
+  let command: string;
+  let commandInputEl: HTMLElement;
+
+  export function focus() {
+    commandInputEl.focus();
+  }
+  export let commands: Record<string, Function>;
+
+  function runCommand(evt: SubmitEvent) {
+    evt.preventDefault();
+    commands[command]();
+  }
 </script>
 
-<form class="command-palette hidden">
-  <label for="cmd-palette"> {label}</label>
+<form class="command-palette hidden" on:submit={runCommand}>
+  <label for="cmd-palette">{label}</label>
   <div class="container">
     <span class="prompt">{prompt}</span>
-    <input type="text" id="cmd-palette" autocomplete="off" />
+    <input
+      type="text"
+      id="cmd-palette"
+      autocomplete="off"
+      bind:value={command}
+      bind:this={commandInputEl}
+    />
   </div>
 </form>
 
