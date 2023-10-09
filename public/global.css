@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 *:focus {
-  outline: 3px dashed #228bec;
+  outline: 3px solid #228bec;
   outline-offset: 0;
 }
 html {
@@ -76,10 +76,11 @@ header {
   position: relative;
   padding: 3rem 2rem;
 }
-header .alert {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
+
+header div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
 }
 
 .form-group > input[type="text"] {

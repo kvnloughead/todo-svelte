@@ -11,6 +11,7 @@
   import Todo from "./Todo.svelte";
   import TodosStatus from "./TodosStatus.svelte";
   import Keybindings from "./Keybindings.svelte";
+  import CommandPalette from "./CommandPalette.svelte";
 
   const shortcutHandlers = {
     ["ctrl+alt+n"]: (evt: KeyboardEvent) => {
@@ -92,11 +93,14 @@
 <Keybindings handlers={shortcutHandlers} />
 
 <header>
-  <Alert />
-  <h1>To-do list</h1>
+  <div>
+    <h1>To-do list</h1>
+    <Alert />
+  </div>
 </header>
 
 <main class="todoapp stack-large">
+  <CommandPalette prompt={">"} />
   <NewTodo
     bind:nameEl
     on:addTodo={(e) => {
