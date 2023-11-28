@@ -11,26 +11,43 @@
   import Todo from "./Todo.svelte";
   import TodosStatus from "./TodosStatus.svelte";
   import Keybindings from "./Keybindings.svelte";
+  import CommandPalette from "./CommandPalette.svelte";
 
   const shortcutHandlers = {
-    ["ctrl+alt+n"]: (evt: KeyboardEvent) => {
-      evt.preventDefault();
+    ["ctrl+alt+n"]: () => {
       nameEl.focus();
     },
-    ["ctrl+alt+s"]: (evt: KeyboardEvent) => {
-      evt.preventDefault();
+    ["ctrl+alt+s"]: () => {
       searchInstance.focus();
     },
-    ["ctrl+alt+f"]: (evt: KeyboardEvent) => {
-      evt.preventDefault();
+    ["ctrl+alt+f"]: () => {
       filterInstance.focus();
     },
+    ["ctrl+k"]: () => {
+      cmdPalette.focus();
+    },
+  };
+
+  const handlers = {
+    "check all": () => checkAll(true),
+    "uncheck all": () => checkAll(false),
+    "remove completed": () => removeCompleted(),
+    search: () => searchInstance.focus(),
+    new: (args: string[]) => {
+      if (!args[0]) {
+        nameEl.focus();
+      } else {
+        addTodo(args[0]);
+      }
+    },
+    onError: (err: Error) => ($alert = `${err}`),
   };
 
   export let todos: TodoType[];
 
   let newTodoId: number, nameEl: HTMLElement;
   let todosStatus: TodosStatus;
+  let cmdPalette: CommandPalette;
   let searchInstance: Search;
   let filterInstance: FilterButton;
   let pattern = "";
@@ -92,11 +109,14 @@
 <Keybindings handlers={shortcutHandlers} />
 
 <header>
-  <Alert />
-  <h1>To-do list</h1>
+  <div>
+    <h1>To-do list</h1>
+    <Alert />
+  </div>
 </header>
 
 <main class="todoapp stack-large">
+  <CommandPalette prompt={"> "} bind:this={cmdPalette} {handlers} />
   <NewTodo
     bind:nameEl
     on:addTodo={(e) => {
